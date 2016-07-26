@@ -12,30 +12,40 @@
   var grocerybuytime = 5000;
   var newcustomertime = 5000;
   var size = 1000;
+  var maxcustomers = 10;
   
 
   var newcust = setInterval(newcustomer, newcustomertime); 
     function newcustomer() { 
-      console.log(newcustomertime);
       clearInterval(newcust);
-
-      customers = customers + 1;
-
-      newcustomertime = Math.floor(Math.random() * (5000 - 4000 + 1)) + 4000 - size;
-      $("#customers").text(customers);
-      newcust = setInterval(newcustomer, newcustomertime);
+    if (groceries > 0 && customers < maxcustomers) {
+        console.log(newcustomertime + " New Customer");  
+        customers = customers + 1;
+        newcustomertime = Math.floor(Math.random() * (5000 - 4000 + 1)) + 4000 - size;
+        $("#customers").text(customers);
+        newcust = setInterval(newcustomer, newcustomertime);
+      } else if (groceries == 0 && customers > 0){
+          console.log(newcustomertime + " Loss Customer");
+          customers = customers - 1;
+          newcustomertime = Math.floor(Math.random() * (5000 - 4000 + 1)) + 4000 - size;
+          $("#customers").text(customers);
+          newcust = setInterval(newcustomer, newcustomertime);
+      }            
     }
-  
+    newcustomer();
+    
+
+    
   var grocerbuy = setInterval(boughtgrocery, grocerybuytime); 
     function boughtgrocery() { 
-      console.log(grocerybuytime);
       clearInterval(grocerbuy);
 
-      if (customers > 0 && groceries > 0){
+      if (groceries > 0 && customers > 0){
         var cust = setInterval(customer, 50);
         function customer() {
           clearInterval(cust);
           groceries = groceries - 1;
+          console.log(grocerybuytime + " Bought Groceries");          
           money = money + groceryvalue;
           $("#money").text(money);
           $("#grocer-text p").text(groceries);
@@ -43,12 +53,11 @@
           $("#customers").text(customers);
         }
       } 
-      else{
-      }
 
       grocerybuytime = Math.floor(Math.random() * (5000 - 4000 + 1)) + 4000;
       grocerbuy = setInterval(boughtgrocery, grocerybuytime);
     }
+    boughtgrocery();
 
   
   $("#order-groceries-b").click(function() {
