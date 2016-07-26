@@ -13,3 +13,22 @@
 	font-size: inherit;
 }
 
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ffecb3;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  background: #ffecb3;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  background-color: #ffc107;
+}
+
+input[type=range] + .thumb {
+  background-color: #ffc107;
+}
+
+input[type=range] + .thumb .value {
+  color: #ffc107;
+}

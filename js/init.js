@@ -7,7 +7,10 @@
   var groceries = 5;
   var groceryorder = 10;
   var customers = 3;
+  var grocerycost = 2;
   var groceryvalue = 5;
+  var maxorder = 20;
+  var maxstock = 50;
   var money = 0;
   var grocerybuytime = 5000;
   var newcustomertime = 5000;
@@ -15,9 +18,7 @@
   var maxcustomers = 10;
   var newcust = setInterval(newcustomer, newcustomertime);
   var grocerbuy = setInterval(boughtgrocery, grocerybuytime);
-  
-  
-  
+
   
   
     function newcustomer() { 
@@ -35,8 +36,8 @@
     }
     
 
-    
- 
+
+
     function boughtgrocery() { 
       clearInterval(grocerbuy);
 
@@ -51,15 +52,32 @@
           $("#grocer-text p").text(groceries);
           customers = customers - 1;
           $("#customers").text(customers);
+          grocerypurchase();
         }
       } 
       grocerybuytime = Math.floor(Math.random() * (5000 - 4000 + 1)) + 4000;
       grocerbuy = setInterval(boughtgrocery, grocerybuytime);
     }
+    
 
+    function grocerypurchase(){
+      var grocerdiff = maxstock - groceries;    
+      if (grocerdiff < maxorder){
+        $('#orderamount').prop({
+          'min': 1,
+          'max': grocerdiff
+        });
+        } else {
+          $('#orderamount').prop({
+          'min': 1,
+          'max': maxorder
+        });
+      }
+    }
   
   $("#order-groceries-b").click(function() {
     var width = 0;
+    var grocerdiff = maxstock - groceries;
     if ( $(this).is(".disabled") ) {
     } else {
       var id = setInterval(frame, 50);
@@ -68,7 +86,15 @@
           if (width >= 100) {
               clearInterval(id);
               $("#order-groceries-p").css("width", '0%');
-              groceries = groceries + groceryorder;
+      if (grocerdiff < maxorder){
+              groceries = groceries + grocerdiff;
+              money = money - (grocerdiff * grocerycost);
+              $("#money").text(money);
+        } else {
+              groceries = groceries + maxorder;
+              money = money - (maxorder * grocerycost);
+              $("#money").text(money);
+      }
               $("#grocer-text p").text(groceries);
               $( "#order-groceries-b" ).removeClass("disabled");
           } else {
@@ -82,4 +108,6 @@
   $( "#stock-groceries-b" ).click(function() {
     groceryorder = groceryorder + 10;
   });
+  
+  grocerypurchase();
 })(jQuery); // end of jQuery name space
