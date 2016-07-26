@@ -41,19 +41,31 @@
       </div>
       <div class="row center">
         <p class="col s6 light">Customers: <span id="customers">3</span></p>
-        <p class="col s6 light">$<span id="money">0</span></p>
+        <p class="col s6 light">$<span id="money">200</span></p>
+      </div>
+      <div class="row center">
+        <p class="col s3 light">Stocked Groceries: <span id="stocked">5</span></p>
+        <p class="col s3 light">Warehouse: <span id="warehouse">0</span></p>
+        <p class="col s3 light">Customers Ready for Checkout: <span id="checkout">0</span></p>
+        <p class="col s3 light">Employees: <span id="employees">0</span></p>
       </div>
       <div class="row">
-        <a id="order-groceries-b" class="btn-large waves-effect waves-light amber">Order Groceries</a>
+        <a id="order-groceries-b" class="btn-large waves-effect waves-light amber col s3">Order Groceries</a>
         <div class="progress amber lighten-4">
           <div id="order-groceries-p" class="determinate amber" style="width: 0%"></div>
         </div>
-        <div id="grocer-text">
-          <p>5</p>
+      </div>
+      <div class="row">
+        <a id="stock-groceries-b" class="btn-large waves-effect waves-light amber active col s3">Stock Groceries</a>
+        <div class="progress amber lighten-4">
+          <div id="stock-groceries-p" class="determinate amber" style="width: 0%"></div>
         </div>
       </div>
       <div class="row">
-        <a href="#" id="stock-groceries-b" class="btn-large waves-effect waves-light amber">Stock Groceries</a>
+        <a id="checkout-groceries-b" class="btn-large waves-effect waves-light amber col s3 disabled">Checkout Customers</a>
+        <div class="progress amber lighten-4">
+          <div id="checkout-groceries-p" class="determinate amber" style="width: 0%"></div>
+        </div>
       </div>
 
       <br><br>
@@ -109,7 +121,7 @@
       <div class="row">
         <div class="col l8 s12">
           <h5 class="white-text">Ideas</h5>
-          <p class="grey-text text-lighten-4">Events such as competition opening and closing. Location upgrade. Slider to determine how much room for storage/stock. Parking lot to hold more customers. Business open times to reset customers. Customers leave if line gets too long. Refine how customers enter to make more sense for more popular stores. Shopping vs checking out customers. Max capacity in store for employees/customers</p>
+          <p class="grey-text text-lighten-4">Make timers more rely on each other before starting. Make progress bars more accurate. Base order cost to make bigger orders more efficient rather than ordering 2 groceries in a single truck vs 50. Events such as competition opening and closing. Location upgrade. Slider to determine how much room for storage/stock. Parking lot to hold more customers. Business open times to reset customers. Customers leave if line gets too long. Refine how customers enter to make more sense for more popular stores. Shopping vs checking out customers. Max capacity in store for employees/customers</p>
 
 
         </div>
