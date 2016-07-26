@@ -6,37 +6,37 @@
   
   var groceries = 5;
   var groceryorder = 10;
-  var customers = 1;
+  var customers = 3;
   var groceryvalue = 5;
   var money = 0;
   var grocerybuytime = 5000;
   var newcustomertime = 5000;
   var size = 1000;
   var maxcustomers = 10;
+  var newcust = setInterval(newcustomer, newcustomertime);
+  var grocerbuy = setInterval(boughtgrocery, grocerybuytime);
   
-
-  var newcust = setInterval(newcustomer, newcustomertime); 
+  
+  
+  
+  
     function newcustomer() { 
       clearInterval(newcust);
-    if (groceries > 0 && customers < maxcustomers) {
+      if (groceries > 0 && customers < maxcustomers) {
         console.log(newcustomertime + " New Customer");  
         customers = customers + 1;
-        newcustomertime = Math.floor(Math.random() * (5000 - 4000 + 1)) + 4000 - size;
-        $("#customers").text(customers);
-        newcust = setInterval(newcustomer, newcustomertime);
       } else if (groceries == 0 && customers > 0){
           console.log(newcustomertime + " Loss Customer");
           customers = customers - 1;
-          newcustomertime = Math.floor(Math.random() * (5000 - 4000 + 1)) + 4000 - size;
-          $("#customers").text(customers);
-          newcust = setInterval(newcustomer, newcustomertime);
-      }            
+      }
+      newcustomertime = Math.floor(Math.random() * (5000 - 4000 + 1)) + 4000 - size;
+      $("#customers").text(customers);
+      newcust = setInterval(newcustomer, newcustomertime);
     }
-    newcustomer();
     
 
     
-  var grocerbuy = setInterval(boughtgrocery, grocerybuytime); 
+ 
     function boughtgrocery() { 
       clearInterval(grocerbuy);
 
@@ -53,11 +53,9 @@
           $("#customers").text(customers);
         }
       } 
-
       grocerybuytime = Math.floor(Math.random() * (5000 - 4000 + 1)) + 4000;
       grocerbuy = setInterval(boughtgrocery, grocerybuytime);
     }
-    boughtgrocery();
 
   
   $("#order-groceries-b").click(function() {
