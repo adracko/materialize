@@ -4,7 +4,7 @@
     $('.button-collapse').sideNav();
   }); // end of document ready
   
-  var stocked = 5;
+  var instock = 5;
   var groceries = 0;
   var customers = 3;
   var checkoutcustomers = 0;
@@ -26,11 +26,11 @@
 
     function tocheckout() { 
       clearInterval(checktimer);
-      if (stocked > 0 && customers > 0) {
+      if (instock > 0 && customers > 0) {
         console.log(customercheckouttime + " Checkout Customer");  
         customers = customers - 1;
         checkoutcustomers = checkoutcustomers + 1;
-      } else if (stocked == 0 && checkoutcustomers > 0){
+      } else if (instock == 0 && checkoutcustomers > 0){
           console.log(customercheckouttime + " Loss Checkout Customer");
           checkoutcustomers = checkoutcustomers - 1;
       }
@@ -42,10 +42,10 @@
   
     function newcustomer() { 
       clearInterval(newcust);
-      if (stocked > 0 && (customers + checkoutcustomers) < maxcustomers) {
+      if (instock > 0 && (customers + checkoutcustomers) < maxcustomers) {
         console.log(newcustomertime + " New Customer");  
         customers = customers + 1;
-      } else if (stocked == 0 && customers > 0){
+      } else if (instock == 0 && customers > 0){
           console.log(newcustomertime + " Loss Customer");
           customers = customers - 1;
       }
@@ -59,15 +59,15 @@
 
     function boughtgrocery() { 
       clearInterval(grocerbuy);
-      if (stocked > 0 && checkoutcustomers > 0){
+      if (instock > 0 && checkoutcustomers > 0){
         var cust = setInterval(customer, 50);
         function customer() {
           clearInterval(cust);
-          stocked = stocked - 1;
+          instock = instock - 1;
           console.log(grocerybuytime + " Bought Groceries");          
           money = money + groceryvalue;
           $("#money").text(money);
-          $("#stocked").text(stocked);
+          $("#stocked").text(instock);
           checkoutcustomers = checkoutcustomers - 1;
           $("#checkout").text(checkoutcustomers);
         }
@@ -79,10 +79,11 @@
   
   $("#order-groceries-b").click(function() {
     var width = 0;
-    var grocerdiff = maxstock - (groceries + stocked);
+    var time = 5;
+    var grocerdiff = maxstock - (groceries + instock);
     if ( $(this).is(".disabled") ) {
     } else {
-      var id = setInterval(frame, 50);
+      var id = setInterval(frame, 100);
       $("#order-groceries-b").addClass("disabled");
       function frame() {
           if (width >= 100) {
@@ -100,7 +101,7 @@
               $("#warehouse").text(groceries);
               $( "#order-groceries-b" ).removeClass("disabled");
           } else {
-              width++; 
+              width = width + ((100 / time) / 10); 
               $("#order-groceries-p").css("width", width + '%'); 
           }
       }
@@ -110,21 +111,22 @@
 
   $("#stock-groceries-b").click(function() {
     var width = 0;
+    var time = 1;
     if ( $(this).is(".disabled") ) {
     } else if (groceries > 0 ) {
-      var id = setInterval(frame, 50);
+      var id = setInterval(frame, 100);
       $("#stock-groceries-b").addClass("disabled");
       function frame() {
           if (width >= 100) {
               clearInterval(id);
               $("#stock-groceries-p").css("width", '0%');
               groceries = groceries - 1;
-              stocked = stocked + 1;
+              instock = instock + 1;
               $("#warehouse").text(groceries);
-              $("#stocked").text(stocked);
+              $("#stocked").text(instock);
               $( "#stock-groceries-b" ).removeClass("disabled");
           } else {
-              width = width + 3; 
+              width = width + ((100 / time) / 10);  
               $("#stock-groceries-p").css("width", width + '%'); 
           }
       }

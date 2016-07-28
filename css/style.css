@@ -32,3 +32,7 @@ input[type=range] + .thumb {
 input[type=range] + .thumb .value {
   color: #ffc107;
 }
+
+.progress .determinate {
+  transition: width .1s linear;
+}
